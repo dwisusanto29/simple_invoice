@@ -131,19 +131,18 @@
                             <td>
                                 Invoice ID : {{ $hasil->id }}<br>
                                 Issue Date : {{ $hasil->issue_date }}<br>
-                                Due Date : {{ $hasil->due_date }}
+                                Due Date : {{ $hasil->due_date }}<br>
                                 Subject : {{ $hasil->subject }}
                                 
                             </td>
                             
                             <td>
-                                
-                                To :
+                                To :<br>
                                 @foreach($costumer as $pelanggan)
-                                {!! $pelanggan->name !!}<br>
-                                {!! $pelanggan->address !!}<br>
-                                {!! $pelanggan->city !!}<br>
-                                {!! $pelanggan->country !!}
+                                 {{ $pelanggan->name }}<br>
+                                {{ $pelanggan->address }}<br>
+                                {{ $pelanggan->city }}<br>
+                                {{ $pelanggan->country }}
                                 @endforeach
 
                             </td>
@@ -157,7 +156,7 @@
         </table>
 
         <table>
-            <th>
+            <tr>
                 <td>
                     Item Type
                 </td>
@@ -172,9 +171,42 @@
                 </td>
                 <td>Amount
                 </td>
-            </th>
-            
-            <tr></tr>
+            </tr>
+
+                @foreach($details as $desc)
+                    <tr>
+                        <td>{{ $desc->type }}</td>
+                        <td>{{ $desc->description }}</td>
+                        <td>{{ $desc->quantity }}</td>
+                        <td>{{ $desc->unit_price }} </td>
+                        <td>{{ number_format($desc->amount,2) }}</td>
+                    </tr>
+                @endforeach
+                
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Subtotal</td>
+                    <td>{{ number_format($hasil->subtotal,2) }}</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Tax</td>
+                    <td>{{ number_format($hasil->tax,2) }}</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Payments</td>
+                    <td>{{ number_format($hasil->payments,2) }}</td>
+                </tr>
+
         </table>
     </div>
 </body>

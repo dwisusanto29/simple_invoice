@@ -13,6 +13,7 @@ use App\Model\Service;
 use App\Model\Trans_details;
 use App\Model\Customer;
 use App\Model\Transaksi;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -73,7 +74,7 @@ class TransactionController extends Controller
     	foreach($service as $layanan){
     		$layananid = $layanan->id;
     		$layananprice = $layanan->unit_price;
-    	}
+
     		foreach ($request->jumlah as $banyak) {
     			Trans_details::create([
 	    			'trans_id' => $data->id,
@@ -82,6 +83,7 @@ class TransactionController extends Controller
 					'amount' => $layananprice * $banyak,
 	    		]);
     		}
+    	}
     	
 
 
@@ -96,7 +98,12 @@ class TransactionController extends Controller
     	}
 
     	$costumer = Customer::findOrFail($customerid)->get();
-    	$details = Trans_details::where('trans_id', $id)->get();
+
+    	$details = DB::table('t_transaction_details')
+    		->join('m_services', 'm_services.id', '=',  't_transaction_details.service_id')
+    		->join('m_type', 'm_type.id', '=', 'm_services.type_id')
+    		->select('m_type.type as type', 'm_services.description as description', 't_transaction_details.quantity as quantity', 't_transaction_details.amount as amount', 'm_services.unit_price as unit_price')
+    		->where('t_transaction_details.trans_id', $id)->get();
 
     	return view('genInvoice', ['result' => $data, 'details' => $details, 'costumer' => $costumer ] );
     }
