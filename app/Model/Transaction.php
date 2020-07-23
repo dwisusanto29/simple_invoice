@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-	protected $table = 't_transactions';
+	protected $table = 't_transcation';
 
     protected $guarded = ['id'];
 

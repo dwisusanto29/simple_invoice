@@ -14,7 +14,7 @@ class Trans_details extends Model
     	return $this->belongsTo('App\Model\Transaction', 'trans_id');
     }
 
-    punlic function service() {
+    public function service() {
     	return $this->belongsTo('App\Model\Service', 'service_id');
     }
 }
