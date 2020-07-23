@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
@@ -89,9 +90,15 @@ class TransactionController extends Controller
 
     public function genInvoice($id)
     {
-    	$data = Transaksi::with(['details', 'customer'])->where('id', $id)->get();
+    	$data = Transaksi::with(['details', 'customer'])->findOrFail($id)->get();
+    	foreach($data as $transaksi){
+    		$customerid = $transaksi->customer_id;
+    	}
 
-    	return view('genInvoice', ['result' => $data,]);
+    	$costumer = Customer::findOrFail($customerid)->get();
+    	$details = Trans_details::where('trans_id', $id)->get();
+
+    	return view('genInvoice', ['result' => $data, 'details' => $details, 'costumer' => $costumer ] );
     }
 
     public function getData($id)

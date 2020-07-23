@@ -99,7 +99,7 @@
 </head>
 
 <body>
-    
+    @foreach($result as $hasil)
     <div class="invoice-box">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
@@ -129,89 +129,54 @@
                     <table>
                         <tr>
                             <td>
-                                {{}}
+                                Invoice ID : {{ $hasil->id }}<br>
+                                Issue Date : {{ $hasil->issue_date }}<br>
+                                Due Date : {{ $hasil->due_date }}
+                                Subject : {{ $hasil->subject }}
+                                
                             </td>
                             
                             <td>
+                                
                                 To :
+                                @foreach($costumer as $pelanggan)
+                                {!! $pelanggan->name !!}<br>
+                                {!! $pelanggan->address !!}<br>
+                                {!! $pelanggan->city !!}<br>
+                                {!! $pelanggan->country !!}
+                                @endforeach
 
-                                {!!!!}<br>
-                                John Doe<br>
-                                john@example.com
                             </td>
+
                         </tr>
                     </table>
                 </td>
             </tr>
             
-            <tr class="heading">
-                <td>
-                    Payment Method
-                </td>
-                
-                <td>
-                    Check #
-                </td>
-            </tr>
             
-            <tr class="details">
+        </table>
+
+        <table>
+            <th>
                 <td>
-                    Check
+                    Item Type
                 </td>
                 
                 <td>
-                    1000
+                    Description
                 </td>
-            </tr>
+                <td>Quantity
+                </td>
+                <td>
+                    Unit Price
+                </td>
+                <td>Amount
+                </td>
+            </th>
             
-            <tr class="heading">
-                <td>
-                    Item
-                </td>
-                
-                <td>
-                    Price
-                </td>
-            </tr>
-            
-            <tr class="item">
-                <td>
-                    Website design
-                </td>
-                
-                <td>
-                    $300.00
-                </td>
-            </tr>
-            
-            <tr class="item">
-                <td>
-                    Hosting (3 months)
-                </td>
-                
-                <td>
-                    $75.00
-                </td>
-            </tr>
-            
-            <tr class="item last">
-                <td>
-                    Domain name (1 year)
-                </td>
-                
-                <td>
-                    $10.00
-                </td>
-            </tr>
-            
-            <tr class="total">
-                <td></td>
-                
-                <td>
-                   Total: $385.00
-                </td>
-            </tr>
+            <tr></tr>
         </table>
     </div>
 </body>
+@endforeach
 @endsection
