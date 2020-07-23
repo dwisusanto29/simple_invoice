@@ -139,10 +139,10 @@
                             <td>
                                 To :<br>
                                 @foreach($costumer as $pelanggan)
-                                 {{ $pelanggan->name }}<br>
-                                {{ $pelanggan->address }}<br>
-                                {{ $pelanggan->city }}<br>
-                                {{ $pelanggan->country }}
+                                    {{ $pelanggan->name }}
+                                    {{ $pelanggan->address }}
+                                    <br>{{ $pelanggan->city }}
+                                    <br>{{ $pelanggan->country }}
                                 @endforeach
 
                             </td>
@@ -157,29 +157,29 @@
 
         <table>
             <tr>
-                <td>
+                <td style="text-align: center">
                     Item Type
                 </td>
                 
-                <td>
+                <td style="text-align: center">
                     Description
                 </td>
-                <td>Quantity
+                <td style="text-align: center"> Quantity
                 </td>
-                <td>
+                <td style="text-align: center">
                     Unit Price
                 </td>
-                <td>Amount
+                <td style="text-align: center">Amount
                 </td>
             </tr>
 
                 @foreach($details as $desc)
                     <tr>
                         <td>{{ $desc->type }}</td>
-                        <td>{{ $desc->description }}</td>
-                        <td>{{ $desc->quantity }}</td>
-                        <td>{{ $desc->unit_price }} </td>
-                        <td>{{ number_format($desc->amount,2) }}</td>
+                        <td style="text-align: left">{{ $desc->description }}</td>
+                        <td style="text-align: center">{{ number_format($desc->quantity,2) }}</td>
+                        <td style="text-align: right">{{ number_format($desc->unit_price,2) }} </td>
+                        <td style="text-align: right">{{ number_format($desc->amount,2) }}</td>
                     </tr>
                 @endforeach
                 
@@ -188,7 +188,7 @@
                     <td></td>
                     <td></td>
                     <td>Subtotal</td>
-                    <td>{{ number_format($hasil->subtotal,2) }}</td>
+                    <td style="text-align: right">{{ number_format($hasil->subtotal,2) }}</td>
                 </tr>
 
                 <tr>
@@ -196,7 +196,7 @@
                     <td></td>
                     <td></td>
                     <td>Tax</td>
-                    <td>{{ number_format($hasil->tax,2) }}</td>
+                    <td style="text-align: right">{{ number_format($hasil->tax,2) }}</td>
                 </tr>
 
                 <tr>
@@ -204,7 +204,7 @@
                     <td></td>
                     <td></td>
                     <td>Payments</td>
-                    <td>{{ number_format($hasil->payments,2) }}</td>
+                    <td style="text-align: right">{{ number_format($hasil->payments,2) }}</td>
                 </tr>
 
         </table>
