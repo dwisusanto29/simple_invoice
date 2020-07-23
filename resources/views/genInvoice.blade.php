@@ -179,7 +179,7 @@
                         <td style="text-align: left">{{ $desc->description }}</td>
                         <td style="text-align: center">{{ number_format($desc->quantity,2) }}</td>
                         <td style="text-align: right">{{ number_format($desc->unit_price,2) }} </td>
-                        <td style="text-align: right">{{ number_format($desc->amount,2) }}</td>
+                        <td style="text-align: right">{{ number_format($desc->quantity * $desc->unit_price ,2)  }}</td>
                     </tr>
                 @endforeach
                 
@@ -188,7 +188,7 @@
                     <td></td>
                     <td></td>
                     <td>Subtotal</td>
-                    <td style="text-align: right">{{ number_format($hasil->subtotal,2) }}</td>
+                    <td style="text-align: right">{{ number_format($hasil->amount,2) }}</td>
                 </tr>
 
                 <tr>
@@ -196,7 +196,7 @@
                     <td></td>
                     <td></td>
                     <td>Tax</td>
-                    <td style="text-align: right">{{ number_format($hasil->tax,2) }}</td>
+                    <td style="text-align: right">{{ number_format($hasil->amount* 10/100,2) }}</td>
                 </tr>
 
                 <tr>
@@ -204,7 +204,7 @@
                     <td></td>
                     <td></td>
                     <td>Payments</td>
-                    <td style="text-align: right">{{ number_format($hasil->payments,2) }}</td>
+                    <td style="text-align: right">{{ number_format($hasil->amount-($hasil->amount* 10/100),2) }}</td>
                 </tr>
 
         </table>

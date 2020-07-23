@@ -68,22 +68,18 @@ class TransactionController extends Controller
     		'issue_date' => $request->issue_date,
     		'subject' => $request->subject,
     	]);
-
-    	$service = Service::all();
-
-    	foreach($service as $layanan){
-    		$layananid = $layanan->id;
-    		$layananprice = $layanan->unit_price;
+    		$i = 1;
 
     		foreach ($request->jumlah as $banyak) {
     			Trans_details::create([
 	    			'trans_id' => $data->id,
-	    			'service_id' => $layananid,
+	    			'service_id' => $i,
 	    			'quantity' => $banyak,
-					'amount' => $layananprice * $banyak,
+					//'amount' => $layananprice * $banyak,
 	    		]);
+	    		$i++;
     		}
-    	}
+    	
     	
 
 
@@ -92,7 +88,7 @@ class TransactionController extends Controller
 
     public function genInvoice($id)
     {
-    	$data = Transaksi::with(['details', 'customer'])->findOrFail($id)->get();
+    	$data = Transaksi::with(['details', 'customer'])->where('id', $id)->get();
     	foreach($data as $transaksi){
     		$customerid = $transaksi->customer_id;
     	}
@@ -102,7 +98,7 @@ class TransactionController extends Controller
     	$details = DB::table('t_transaction_details')
     		->join('m_services', 'm_services.id', '=',  't_transaction_details.service_id')
     		->join('m_type', 'm_type.id', '=', 'm_services.type_id')
-    		->select('m_type.type as type', 'm_services.description as description', 't_transaction_details.quantity as quantity', 't_transaction_details.amount as amount', 'm_services.unit_price as unit_price')
+    		->select('m_type.type as type', 'm_services.description as description', 't_transaction_details.quantity as quantity', 'm_services.unit_price as unit_price')
     		->where('t_transaction_details.trans_id', $id)->get();
 
     	return view('genInvoice', ['result' => $data, 'details' => $details, 'costumer' => $costumer ] );

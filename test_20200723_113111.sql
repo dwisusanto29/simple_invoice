@@ -202,6 +202,11 @@ ALTER TABLE `t_transcation`
 -- -------------------------------------------------------------
 
 
+CREATE VIEW transaksi AS
+SELECT * FROM t_transcation JOIN ( SELECT t_transaction_details.trans_id, sum(m_services.unit_price * t_transaction_details.quantity)  as amount  FROM t_transaction_details 
+join m_services on m_services.id = t_transaction_details.service_id
+group by t_transaction_details.trans_id ) as details on (details.trans_id = t_transcation.id);
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
