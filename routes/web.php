@@ -22,3 +22,5 @@ Route::get('/invoice/add', 'TransactionController@create');
 Route::post('/invoice/add', 'TransactionController@store');
 
 Route::get('/invoice/gen/{id}', 'TransactionController@genInvoice');
+
+Route::get('/invoice/{id}', 'TransactionController@getData');

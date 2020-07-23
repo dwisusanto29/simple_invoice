@@ -27,6 +27,11 @@ class TransactionController extends Controller
     	$data = Transaksi::with(['details', 'customer']);
 
     	return DataTables::of($data)
+    		->addColumn('action', function ($data) {
+                            $button = '<button type="button" name="gen" id="' . $data->id . '" class="edit btn btn-primary btn-sm "><i class="fa fa-eye"></i>Generate Invoice</button> ';
+                            return $button;
+                        })
+    		->rawColumns(['action'])
     		->addIndexColumn()
     		->make(true);
     }
@@ -84,8 +89,17 @@ class TransactionController extends Controller
 
     public function genInvoice($id)
     {
-    	$data = Transaksi::with(['details', 'customer'])->where('id', $id);
+    	$data = Transaksi::with(['details', 'customer'])->where('id', $id)->get();
 
-    	return view('genInvoice', ['$data'=> $data]);
+    	return view('genInvoice', ['result' => $data,]);
     }
+
+    public function getData($id)
+    {
+    	$data = Transaksi::with(['details', 'customer'])->where('id', $id)->get();
+
+    	return response()->json(['data' => $data ]);
+    }
+
+
 }

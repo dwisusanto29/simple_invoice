@@ -120,7 +120,7 @@
 
         $(document).on('click', '.edit', function () {
             var user_id = $(this).attr('id');
-            var url = '{{ url('invoice/edit/') }}' + '/' + user_id + '';
+            var url = '{{ url('invoice/gen/') }}' + '/' + user_id + '';
             location.href = url;
         });
 

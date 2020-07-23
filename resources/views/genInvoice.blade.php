@@ -1,8 +1,7 @@
-<!doctype html>
-<html>
+@extends('layouts.appnew')
+@section('content')
 <head>
-    <meta charset="utf-8">
-    <title>A simple, clean, and responsive HTML invoice template</title>
+    <title>Invoice</title>
     
     <style>
     .invoice-box {
@@ -100,6 +99,7 @@
 </head>
 
 <body>
+    
     <div class="invoice-box">
         <table cellpadding="0" cellspacing="0">
             <tr class="top">
@@ -111,10 +111,14 @@
                             </td>
                             
                             <td>
-                                Invoice #: 123<br>
-                                Created: January 1, 2015<br>
-                                Due: February 1, 2015
+                                From: <br>
+                                Discovery Designs <br>
+                                41 St Vincent Place <br>
+                                Glasgow G1 2ER <br>
+                                Scotland
                             </td>
+
+
                         </tr>
                     </table>
                 </td>
@@ -125,13 +129,13 @@
                     <table>
                         <tr>
                             <td>
-                                Sparksuite, Inc.<br>
-                                12345 Sunny Road<br>
-                                Sunnyville, CA 12345
+                                {{}}
                             </td>
                             
                             <td>
-                                Acme Corp.<br>
+                                To :
+
+                                {!!!!}<br>
                                 John Doe<br>
                                 john@example.com
                             </td>
@@ -210,4 +214,4 @@
         </table>
     </div>
 </body>
-</html>
+@endsection
